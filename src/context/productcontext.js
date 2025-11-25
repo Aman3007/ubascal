@@ -5,7 +5,7 @@ import reducer from "../Reducer/productReducer"
 const AppContext =createContext();
 
 
-const API="https://fakestoreapi.com/products"
+const API="https://69254f8882b59600d7231d77.mockapi.io/products/elec"
 
 const initialState={
     isloading:false,
