@@ -36,8 +36,8 @@ const[state,dispatch]=useReducer(reducer,initialState);
           dispatch({type:"SET_SINGLE_LOADING"})
          try {
            const res= await axios.get(url);
-           const singleProduct = await res.data;
-           dispatch({type:"SET_SINGLE_DATA",payload:singleProduct}) 
+          const data = await res.data;
+dispatch({ type: "SET_SINGLE_DATA", payload: data[0] });
          } catch (error) {
           dispatch({type:"API_SINGLE_ERROR"});
          }

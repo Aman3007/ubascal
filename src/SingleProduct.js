@@ -19,22 +19,31 @@ import AddToCart from "./components/AddToCart";
 
 const  API="https://69254f8882b59600d7231d77.mockapi.io/products/ele";
 const SingleProduct= () => {
-  const{getSingleProduct,isSingleLoading,singleProduct}=useProductContext();
-  const {id}= useParams();
+ const { getSingleProduct, isSingleLoading, singleProduct } = useProductContext();
+ console.log("Single Product Data: ", singleProduct);
 
-const{
-id:alias,
-name,company,price,description,category,stock,stars,reviews,image
+const { id } = useParams();
 
-}=singleProduct;
+useEffect(() => {
+  getSingleProduct(`${API}?id=${id}`);
+}, [id]);
 
-  useEffect(()=>{
-    getSingleProduct(`${API}?id=${id}`);
-  },[])
-if(isSingleLoading){
-  return <div className="page_loading">......Loadig</div>
+if (isSingleLoading || !singleProduct || !singleProduct.id) {
+  return <div className="page_loading">Loading...</div>;
 }
 
+const {
+  id: alias,
+  name,
+  company,
+  price,
+  description,
+  category,
+  stock,
+  stars,
+  reviews,
+  image,
+} = singleProduct;
   return (
     <Wrapper>
       <PageNavigation title={name} />
@@ -42,7 +51,8 @@ if(isSingleLoading){
         <div className="grid grid-two-column">
           {/* product Images  */}
           <div className="product_images">
-            <MyImage imgs={image} />
+            <MyImage imgs={[{ url: image, filename: name }]} />
+        
           </div>
 
           {/* product dAta  */}
@@ -95,7 +105,8 @@ if(isSingleLoading){
               </p>
             </div>
             <hr />
-            {stock > 0 && <AddToCart product={singleProduct} />}
+            {stock > 0 && <AddToCart product={{ ...singleProduct, colors: ["default"] }} />}
+
           </div>
         </div>
       </Container>
