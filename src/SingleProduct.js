@@ -17,7 +17,7 @@ import AddToCart from "./components/AddToCart";
 
 
 
-const  API="https://api.pujakaitem.com/api/products";
+const  API="https://69254f8882b59600d7231d77.mockapi.io/products/elec";
 const SingleProduct= () => {
   const{getSingleProduct,isSingleLoading,singleProduct}=useProductContext();
   const {id}= useParams();
